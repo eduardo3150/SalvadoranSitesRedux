@@ -108,6 +108,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let imagepath = self.categoriesList[indexPath.item].thumbnail!
         cell.categoryThumbnail.sd_setImage(with: URL(string:imagepath), placeholderImage: UIImage(named: "nodisponible.png"));
+        cell.categoryThumbnail.contentMode = .scaleAspectFit
         return cell;
     }
     

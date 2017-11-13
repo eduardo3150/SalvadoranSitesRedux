@@ -26,6 +26,7 @@ class DetailSiteController: UIViewController {
         descriptionDetail.text = sitio?.descriptionLocation
         let imagepath = sitio?.thumbnail
         descriptionThumbnail.sd_setImage(with: URL(string:imagepath!), placeholderImage: UIImage(named: "nodisponible.png"));
+        descriptionThumbnail.contentMode = .scaleAspectFit
     }
     
     override func didReceiveMemoryWarning() {
