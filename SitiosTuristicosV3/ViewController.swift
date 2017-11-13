@@ -46,7 +46,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func refresh(){
         print("Refresh content")
         
-        Alamofire.request("https://gitlab.com/snippets/1682272/raw").responseJSON { response in
+        Alamofire.request("http://salvadoransites.us-west-2.elasticbeanstalk.com/api/v1/categories").responseJSON { response in
             
             switch response.result{
                 
@@ -69,18 +69,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             var sitesList: [Sitio] = [Sitio]()
             
             category.id = item["id"].int!
-            category.category = item["categoria"].string!
-            category.thumbnail = item["thumbnail"].string!
+            category.category = item["category_name"].string!
+            category.thumbnail = item["category_thumbnail"].string!
             category.categoryPin = item["category_pin"].string!
             print(category.category ?? "error")
-            for site in item["sitios"].arrayValue {
+            for site in item["places"].arrayValue {
                 let sitio : Sitio = Sitio(
                     id : site["id"].int!,
-                    title: site["nombre"].string!,
-                    descriptionLocation : site["descripcion"].string!,
-                    thumbnail : site["thumbnail"].string!,
-                    coordinate : CLLocationCoordinate2D(latitude: Double(site["latitud"].string!)!,
-                                                        longitude: Double(site["longitud"].string!)!)
+                    title: site["name"].string!,
+                    descriptionLocation : site["description"].string!,
+                    thumbnail : site["place_thumbnail"].string!,
+                    coordinate : CLLocationCoordinate2D(latitude: Double(site["latitude"].string!)!,
+                                                        longitude: Double(site["longitude"].string!)!)
                 )
                 
                 sitesList.append(sitio)
@@ -106,7 +106,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         cell.categoryTitle.text = self.categoriesList[indexPath.item].category;
         
-        let imagepath = self.categoriesList[indexPath.item].thumbnail!
+        let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+self.categoriesList[indexPath.item].thumbnail!
         cell.categoryThumbnail.sd_setImage(with: URL(string:imagepath), placeholderImage: UIImage(named: "nodisponible.png"));
         cell.categoryThumbnail.contentMode = .scaleAspectFit
         return cell;

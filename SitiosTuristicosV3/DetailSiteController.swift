@@ -24,8 +24,8 @@ class DetailSiteController: UIViewController {
         print(sitio?.title ?? "error")
         descriptionTitle.text = sitio?.title
         descriptionDetail.text = sitio?.descriptionLocation
-        let imagepath = sitio?.thumbnail
-        descriptionThumbnail.sd_setImage(with: URL(string:imagepath!), placeholderImage: UIImage(named: "nodisponible.png"));
+        let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+(sitio?.thumbnail)!
+        descriptionThumbnail.sd_setImage(with: URL(string:imagepath), placeholderImage: UIImage(named: "nodisponible.png"));
         descriptionThumbnail.contentMode = .scaleAspectFit
     }
     

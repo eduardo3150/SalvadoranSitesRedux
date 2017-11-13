@@ -83,10 +83,10 @@ class MapController: UIViewController, MKMapViewDelegate {
             dequeuedView.annotation = annotation
             view = dequeuedView
             
-            let imagepath = self.category?.categoryPin
+            let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+(self.category?.categoryPin)!
             
             
-            Alamofire.request(imagepath!).responseImage { response in
+            Alamofire.request(imagepath).responseImage { response in
                 if let picture = response.result.value {
                     view.image = picture
                 } else {
@@ -102,9 +102,9 @@ class MapController: UIViewController, MKMapViewDelegate {
             view.calloutOffset = CGPoint(x: -5, y: 5)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             
-            let imagepath = self.category?.categoryPin
+            let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+(self.category?.categoryPin)!
             
-            Alamofire.request(imagepath!).responseImage { response in
+            Alamofire.request(imagepath).responseImage { response in
                 if let picture = response.result.value {
                     view.image = picture
                 } else {
