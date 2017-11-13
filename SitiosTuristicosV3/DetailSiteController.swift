@@ -19,12 +19,14 @@ class DetailSiteController: UIViewController {
     
     @IBOutlet weak var descriptionThumbnail: UIImageView!
     
+    let BASE_IMG_URL = "http://salvadoransitesv2.us-west-2.elasticbeanstalk.com"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(sitio?.title ?? "error")
         descriptionTitle.text = sitio?.title
         descriptionDetail.text = sitio?.descriptionLocation
-        let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+(sitio?.thumbnail)!
+        let imagepath = BASE_IMG_URL+(sitio?.thumbnail)!
         descriptionThumbnail.sd_setImage(with: URL(string:imagepath), placeholderImage: UIImage(named: "nodisponible.png"));
         descriptionThumbnail.contentMode = .scaleAspectFit
     }

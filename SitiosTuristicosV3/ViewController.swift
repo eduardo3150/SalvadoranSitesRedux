@@ -23,6 +23,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     let cellIdentifier : String = "cellIdentifierCategory"
     var refreshControl: UIRefreshControl!
     
+    let IMG_BASE_URL = "http://salvadoransitesv2.us-west-2.elasticbeanstalk.com"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func refresh(){
         print("Refresh content")
         
-        Alamofire.request("http://salvadoransites.us-west-2.elasticbeanstalk.com/api/v1/categories").responseJSON { response in
+        Alamofire.request("http://salvadoransitesv2.us-west-2.elasticbeanstalk.com/api/v1/categories").responseJSON { response in
             
             switch response.result{
                 
@@ -97,6 +99,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.categoriesList.isEmpty && collectionView.backgroundView == nil {
+            let noItemLabel = UILabel() //no need to set frame.
+            noItemLabel.textAlignment = .center
+            noItemLabel.textColor = .lightGray
+            noItemLabel.text = "Sin elementos que mostrar"
+            collectionView.backgroundView = noItemLabel
+        }
+        collectionView.backgroundView?.isHidden = !categoriesList.isEmpty
         return self.categoriesList.count
     }
 
@@ -106,9 +116,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         cell.categoryTitle.text = self.categoriesList[indexPath.item].category;
         
-        let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+self.categoriesList[indexPath.item].thumbnail!
+        let imagepath = IMG_BASE_URL+self.categoriesList[indexPath.item].thumbnail!
         cell.categoryThumbnail.sd_setImage(with: URL(string:imagepath), placeholderImage: UIImage(named: "nodisponible.png"));
-        cell.categoryThumbnail.contentMode = .scaleAspectFit
+        cell.categoryThumbnail.contentMode = .scaleToFill
         return cell;
     }
     

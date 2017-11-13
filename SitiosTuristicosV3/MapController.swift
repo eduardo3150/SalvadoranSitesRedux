@@ -24,6 +24,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     let regionRadius: CLLocationDistance = 500000
     var points:[CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
     
+    let IMG_BASE_URL = "http://salvadoransitesv2.us-west-2.elasticbeanstalk.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +84,7 @@ class MapController: UIViewController, MKMapViewDelegate {
             dequeuedView.annotation = annotation
             view = dequeuedView
             
-            let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+(self.category?.categoryPin)!
+            let imagepath = IMG_BASE_URL+(self.category?.categoryPin)!
             
             
             Alamofire.request(imagepath).responseImage { response in
@@ -102,7 +103,7 @@ class MapController: UIViewController, MKMapViewDelegate {
             view.calloutOffset = CGPoint(x: -5, y: 5)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             
-            let imagepath = "http://salvadoransites.us-west-2.elasticbeanstalk.com"+(self.category?.categoryPin)!
+            let imagepath = IMG_BASE_URL+(self.category?.categoryPin)!
             
             Alamofire.request(imagepath).responseImage { response in
                 if let picture = response.result.value {
